@@ -19,7 +19,7 @@ type ClusterManagerAddOn struct {
 	// Spec represents a desired configuration for the agent on the cluster manager addon
 	Spec ClusterManagerAddOnSpec `json:"spec"`
 
-	// Status represents the current status of joined managed cluster manager addon
+	// Status represents the current status of cluster manager addon
 	// +optional
 	Status ClusterManagerAddOnStatus `json:"status,omitempty"`
 }
@@ -47,12 +47,12 @@ type AddOnInfo struct {
 	Description string `json:"description"`
 }
 
-// ClusterManagerAddOnStatus represents the current status of joined managed cluster.
+// ClusterManagerAddOnStatus represents the current status of cluster manager addon.
 type ClusterManagerAddOnStatus struct {
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// ClusterManagerAddOnList is a collection of managed cluster.
+// ClusterManagerAddOnList is a collection of cluster manager addons.
 type ClusterManagerAddOnList struct {
 	metav1.TypeMeta `json:",inline"`
 	// Standard list metadata.
@@ -60,6 +60,6 @@ type ClusterManagerAddOnList struct {
 	// +optional
 	metav1.ListMeta `json:"metadata,omitempty"`
 
-	// Items is a list of managed cluster.
+	// Items is a list of cluster manager addons.
 	Items []ClusterManagerAddOn `json:"items"`
 }

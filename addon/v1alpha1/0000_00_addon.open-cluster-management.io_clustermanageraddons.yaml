@@ -67,8 +67,7 @@ spec:
                 addon configurations
               type: string
         status:
-          description: Status represents the current status of joined managed cluster
-            manager addon
+          description: Status represents the current status of cluster manager addon
           type: object
 status:
   acceptedNames:

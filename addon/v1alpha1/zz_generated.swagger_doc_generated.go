@@ -25,7 +25,7 @@ func (AddOnInfo) SwaggerDoc() map[string]string {
 var map_ClusterManagerAddOn = map[string]string{
 	"":       "ClusterManagerAddOn represents the desired state and current status of one/many managed cluster addons. ClusterManagerAddOn is a cluster scoped resource.",
 	"spec":   "Spec represents a desired configuration for the agent on the cluster manager addon",
-	"status": "Status represents the current status of joined managed cluster manager addon",
+	"status": "Status represents the current status of cluster manager addon",
 }
 
 func (ClusterManagerAddOn) SwaggerDoc() map[string]string {
@@ -33,9 +33,9 @@ func (ClusterManagerAddOn) SwaggerDoc() map[string]string {
 }
 
 var map_ClusterManagerAddOnList = map[string]string{
-	"":         "ClusterManagerAddOnList is a collection of managed cluster.",
+	"":         "ClusterManagerAddOnList is a collection of cluster manager addons.",
 	"metadata": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-	"items":    "Items is a list of managed cluster.",
+	"items":    "Items is a list of cluster manager addons.",
 }
 
 func (ClusterManagerAddOnList) SwaggerDoc() map[string]string {
@@ -53,7 +53,7 @@ func (ClusterManagerAddOnSpec) SwaggerDoc() map[string]string {
 }
 
 var map_ClusterManagerAddOnStatus = map[string]string{
-	"": "ClusterManagerAddOnStatus represents the current status of joined managed cluster.",
+	"": "ClusterManagerAddOnStatus represents the current status of cluster manager addon.",
 }
 
 func (ClusterManagerAddOnStatus) SwaggerDoc() map[string]string {
