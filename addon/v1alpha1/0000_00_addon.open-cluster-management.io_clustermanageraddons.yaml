@@ -1,0 +1,78 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  name: clustermanageraddons.addon.open-cluster-management.io
+spec:
+  group: addon.open-cluster-management.io
+  names:
+    kind: ClusterManagerAddOn
+    listKind: ClusterManagerAddOnList
+    plural: clustermanageraddons
+    singular: clustermanageraddon
+  scope: Cluster
+  subresources:
+    status: {}
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+  "validation":
+    "openAPIV3Schema":
+      description: ClusterManagerAddOn represents the desired state and current status
+        of one/many managed cluster addons. ClusterManagerAddOn is a cluster scoped
+        resource.
+      type: object
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: Spec represents a desired configuration for the agent on the
+            cluster manager addon
+          type: object
+          properties:
+            addons:
+              description: AddOns is the array of addon information helps the UI to
+                find and display each addons
+              type: array
+              items:
+                description: AddOnInfo contains the name of ManagedClusterAddon CR,
+                  display name we will use for UI, and description of an addon
+                type: object
+                properties:
+                  description:
+                    description: Description is the description of the addon displayed
+                      on UI
+                    type: string
+                  displayName:
+                    description: DisplayName is the addon name displayed on UI
+                    type: string
+                  name:
+                    description: Name is the same as the metadata.name of the referenced
+                      ManagedClusterAddon CR
+                    type: string
+            crdRef:
+              description: CRDRef is the CRD name of the addon CRs, which used for
+                addon configurations
+              type: string
+        status:
+          description: Status represents the current status of joined managed cluster
+            manager addon
+          type: object
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

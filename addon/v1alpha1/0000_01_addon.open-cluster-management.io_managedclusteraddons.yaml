@@ -1,0 +1,181 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  name: managedclusteraddons.addon.open-cluster-management.io
+spec:
+  group: addon.open-cluster-management.io
+  names:
+    kind: ManagedClusterAddOn
+    listKind: ManagedClusterAddOnList
+    plural: managedclusteraddons
+    singular: managedclusteraddon
+  scope: ""
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+  "validation":
+    "openAPIV3Schema":
+      description: ManagedClusterAddOn is the Custom Resource object which holds the
+        current state of an addon. This object is used by addon operators to convey
+        their state. The resource should be created in the ManagedCluster's cluster
+        namespace.
+      type: object
+      required:
+      - spec
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: spec holds configuration that could apply to any operator.
+          type: object
+          properties:
+            updateApproved:
+              description: UpdateApproved represents that user has approved the update
+                of the particular addon for a specific the managed cluster on the
+                hub. The default value is false, it can only be set to true when the
+                latestVersion and currentVersion is on different version. When the
+                value is set true, the controller/operator that manages the addon
+                will proceed to update the addon. The value will be set to false by
+                mutating webhook when latestVersion matches currentVersion.
+              type: boolean
+        status:
+          description: status holds the information about the state of an operator.  It
+            is consistent with status information across the Kubernetes ecosystem.
+          type: object
+          properties:
+            addonResource:
+              description: addonResource is a reference  to an object that contain
+                the configuration of the addon
+              type: object
+              required:
+              - group
+              - name
+              - resource
+              properties:
+                group:
+                  description: group of the referent.
+                  type: string
+                name:
+                  description: name of the referent.
+                  type: string
+                resource:
+                  description: resource of the referent.
+                  type: string
+            conditions:
+              description: conditions describes the state of the operator's managed
+                and monitored components.
+              type: array
+              items:
+                description: AddOnStatusCondition represents the state of the addon's
+                  managed and monitored components.
+                type: object
+                required:
+                - lastTransitionTime
+                - status
+                - type
+                properties:
+                  lastTransitionTime:
+                    description: lastTransitionTime is the time of the last update
+                      to the current status property.
+                    type: string
+                    format: date-time
+                  message:
+                    description: message provides additional information about the
+                      current condition. This is only to be consumed by humans.
+                    type: string
+                  reason:
+                    description: reason is the CamelCase reason for the condition's
+                      current status.
+                    type: string
+                  status:
+                    description: status of the condition, one of True, False, Unknown.
+                    type: string
+                  type:
+                    description: type specifies the aspect reported by this condition.
+                    type: string
+            currentVersion:
+              description: CurrentVersion indicates the current Version of the addon
+                During the agent update process this field will be set to same value
+                as latestVersion after the update has been completed
+              type: object
+              properties:
+                relatedImages:
+                  description: RelatedImages is list of images will be used for the
+                    specific version this will be use for backward compatability (i.e
+                    hub updated but agent have not)
+                  type: array
+                  items:
+                    description: RelatedImage represents information for one of the
+                      images that the agent uses its associated key.
+                    type: object
+                    properties:
+                      image:
+                        description: ImagePullSpec represents the desired image of
+                          the component for the addon agent.
+                        type: string
+                      imageKey:
+                        description: ImageKey is the key to link the image to specific
+                          deployment for the agent this will be use for backward compatability,
+                          i.e if the hub updated but agent have not the agent controller
+                          can use this information to continue to manage the agent.
+                        type: string
+                version:
+                  description: version is a semantic versioning identifying the update
+                    version. When this field is part of spec, version is optional
+                    if image is specified.
+                  type: string
+            latestVersion:
+              description: LatestVersion indicates the latest available Version for
+                the addon
+              type: object
+              properties:
+                relatedImages:
+                  description: RelatedImages is list of images will be used for the
+                    specific version this will be use for backward compatability (i.e
+                    hub updated but agent have not)
+                  type: array
+                  items:
+                    description: RelatedImage represents information for one of the
+                      images that the agent uses its associated key.
+                    type: object
+                    properties:
+                      image:
+                        description: ImagePullSpec represents the desired image of
+                          the component for the addon agent.
+                        type: string
+                      imageKey:
+                        description: ImageKey is the key to link the image to specific
+                          deployment for the agent this will be use for backward compatability,
+                          i.e if the hub updated but agent have not the agent controller
+                          can use this information to continue to manage the agent.
+                        type: string
+                version:
+                  description: version is a semantic versioning identifying the update
+                    version. When this field is part of spec, version is optional
+                    if image is specified.
+                  type: string
+            updateAvailable:
+              description: UpdateAvailable indicates if there is an version update
+                that is available for the addon it will be set to false if currentVersion.version
+                != latestVersion.version it will be set to true if currentVersion.version
+                == latestVersion.version
+              type: boolean
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
