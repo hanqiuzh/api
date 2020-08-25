@@ -63,7 +63,7 @@ type ManagedClusterAddOnStatus struct {
 	// it will be set to false if currentVersion.version != latestVersion.version
 	// it will be set to true if currentVersion.version == latestVersion.version
 	// +optional
-	UpdateAvailable boolean `json:"updateAvailable,omitempty"`
+	UpdateAvailable bool `json:"updateAvailable,omitempty"`
 }
 
 // ObjectReference contains enough information to let you inspect or modify the referred object.
