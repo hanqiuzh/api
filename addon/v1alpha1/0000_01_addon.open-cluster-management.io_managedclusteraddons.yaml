@@ -46,7 +46,7 @@ spec:
               description: UpdateApproved represents that user has approved the update
                 of the particular addon for a specific the managed cluster on the
                 hub. The default value is false, it can only be set to true when the
-                latestVersion and currentVersion is on different version. When the
+                latestVersion and currentVersion is on a different version. When the
                 value is set true, the controller/operator that manages the addon
                 will proceed to update the addon. The value will be set to false by
                 mutating webhook when latestVersion matches currentVersion.
@@ -75,7 +75,7 @@ spec:
                   description: resource of the referent.
                   type: string
             conditions:
-              description: conditions describes the state of the operator's managed
+              description: conditions describe the state of the operator's managed
                 and monitored components.
               type: array
               items:
@@ -114,12 +114,12 @@ spec:
               properties:
                 relatedImages:
                   description: RelatedImages is list of images will be used for the
-                    specific version this will be use for backward compatability (i.e
+                    specific version this will be use for backward compatibility (i.e
                     hub updated but agent have not)
                   type: array
                   items:
                     description: RelatedImage represents information for one of the
-                      images that the agent uses its associated key.
+                      images that the agent uses as its associated key.
                     type: object
                     properties:
                       image:
@@ -128,7 +128,7 @@ spec:
                         type: string
                       imageKey:
                         description: ImageKey is the key to link the image to specific
-                          deployment for the agent this will be use for backward compatability,
+                          deployment for the agent this will be use for backward compatibility,
                           i.e if the hub updated but agent have not the agent controller
                           can use this information to continue to manage the agent.
                         type: string
@@ -144,12 +144,12 @@ spec:
               properties:
                 relatedImages:
                   description: RelatedImages is list of images will be used for the
-                    specific version this will be use for backward compatability (i.e
+                    specific version this will be use for backward compatibility (i.e
                     hub updated but agent have not)
                   type: array
                   items:
                     description: RelatedImage represents information for one of the
-                      images that the agent uses its associated key.
+                      images that the agent uses as its associated key.
                     type: object
                     properties:
                       image:
@@ -158,7 +158,7 @@ spec:
                         type: string
                       imageKey:
                         description: ImageKey is the key to link the image to specific
-                          deployment for the agent this will be use for backward compatability,
+                          deployment for the agent this will be use for backward compatibility,
                           i.e if the hub updated but agent have not the agent controller
                           can use this information to continue to manage the agent.
                         type: string
@@ -170,8 +170,8 @@ spec:
             updateAvailable:
               description: UpdateAvailable indicates if there is an version update
                 that is available for the addon it will be set to false if currentVersion.version
-                != latestVersion.version it will be set to true if currentVersion.version
-                == latestVersion.version
+                == latestVersion.version it will be set to true if currentVersion.version
+                != latestVersion.version
               type: boolean
 status:
   acceptedNames:

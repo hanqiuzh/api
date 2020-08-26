@@ -20,9 +20,12 @@ spec:
     storage: true
   "validation":
     "openAPIV3Schema":
-      description: ClusterManagerAddOn represents the desired state and current status
-        of one/many managed cluster addons. ClusterManagerAddOn is a cluster scoped
-        resource.
+      description: ClusterManagerAddOn represents the registration of an addon It
+        allows the user to discover which addon is available for the cluster manager.
+        It provide a linkage from ClusterManagerAddOn to ManagedClusterAddOn The name
+        of the ClusterManagerAddOn resource will be the use for the namespace scoped
+        ManagedClusterAddon resource It also provides metadata information about the
+        addon. ClusterManagerAddOn is a cluster scoped resource.
       type: object
       properties:
         apiVersion:
@@ -42,29 +45,18 @@ spec:
             cluster manager addon
           type: object
           properties:
-            addons:
-              description: AddOns is the array of addon information helps the UI to
-                find and display each addons
-              type: array
-              items:
-                description: AddOnInfo contains the name of ManagedClusterAddon CR,
-                  display name we will use for UI, and description of an addon
-                type: object
-                properties:
-                  description:
-                    description: Description is the description of the addon displayed
-                      on UI
-                    type: string
-                  displayName:
-                    description: DisplayName is the addon name displayed on UI
-                    type: string
-                  name:
-                    description: Name is the same as the metadata.name of the referenced
-                      ManagedClusterAddon CR
-                    type: string
-            crdRef:
-              description: CRDRef is the CRD name of the addon CRs, which used for
-                addon configurations
+            addOnConfigCRD:
+              description: AddOnConfigCRD is the name for the CRD name of the addon
+                CRs, which is used for addon configurations. It will inform the user
+                which resource the add-on controller/operator will use to control
+                the addon.
+              type: string
+            description:
+              description: Description represents the detailed description of the
+                addon.
+              type: string
+            displayName:
+              description: DisplayName represents the name that will be displayed.
               type: string
         status:
           description: Status represents the current status of cluster manager addon
