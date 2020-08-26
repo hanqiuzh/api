@@ -10,8 +10,10 @@ import (
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope="Cluster"
 
-// ClusterManagerAddOn represents the desired state and current status of one/many
-// managed cluster addons. ClusterManagerAddOn is a cluster scoped resource.
+// ClusterManagerAddOn represents the registration of an addon
+// It allows the user to discover which addon is available for the cluster manager.
+// It also provides metadata information about the addon
+// ClusterManagerAddOn is a cluster scoped resource.
 type ClusterManagerAddOn struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -27,24 +29,23 @@ type ClusterManagerAddOn struct {
 // ClusterManagerAddOnSpec provides the information of addon CRD, related ManagedClusterAddon
 // names, and addon information we will use for UI
 type ClusterManagerAddOnSpec struct {
-	// CRDRef is the CRD name of the addon CRs, which used for addon configurations
+	// DisplayName represents the name that will be displayed.
 	// +required
-	CRDRef string `json:"crdRef"`
-	// AddOns is the array of addon information helps the UI to find and display each addons
-	// +required
-	AddOns []AddOnInfo `json:"addons"`
-}
-
-// AddOnInfo contains the name of ManagedClusterAddon CR, display name we will use for UI, and
-// description of an addon
-type AddOnInfo struct {
-	// Name is the same as the metadata.name of the referenced ManagedClusterAddon CR
-	// +required
-	Name string `json:"name"`
-	// DisplayName is the addon name displayed on UI
 	DisplayName string `json:"displayName"`
-	// Description is the description of the addon displayed on UI
+
+	// Description represents the detail description of the addon.
+	// +required
 	Description string `json:"description"`
+
+	// AddOnConfigCRD is the name for the CRD name of the addon CRs, which is used for addon configurations.
+	// It will inform the user which resource will the add-on controller/operator use to control the addon.
+	// +required
+	AddOnConfigCRD string `json:"addOnConfigCRD"`
+
+	// ManagedClusterAddOnName is the metadata.name of the referenced ManagedClusterAddon CR.
+	// The name will be use to associate the ManagedClusterAddOn resource to ClusterManagerAddon.
+	// +required
+	ManagedClusterAddOnName string `json:"name"`
 }
 
 // ClusterManagerAddOnStatus represents the current status of cluster manager addon.
