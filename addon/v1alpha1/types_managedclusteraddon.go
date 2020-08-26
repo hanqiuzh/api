@@ -30,7 +30,7 @@ type ManagedClusterAddOnSpec struct {
 	// UpdateApproved represents that user has approved the update of the particular addon for a specific
 	// the managed cluster on the hub.
 	// The default value is false, it can only be set to true when the latestVersion and currentVersion
-	// is on different version.
+	// is on a different version.
 	// When the value is set true, the controller/operator that manages the addon will proceed to update the addon.
 	// The value will be set to false by mutating webhook when latestVersion matches currentVersion.
 	// +required
@@ -40,7 +40,7 @@ type ManagedClusterAddOnSpec struct {
 // ManagedClusterAddOnStatus provides information about the status of the operator.
 // +k8s:deepcopy-gen=true
 type ManagedClusterAddOnStatus struct {
-	// conditions describes the state of the operator's managed and monitored components.
+	// conditions describe the state of the operator's managed and monitored components.
 	// +patchMergeKey=type
 	// +patchStrategy=merge
 	// +optional
@@ -60,8 +60,8 @@ type ManagedClusterAddOnStatus struct {
 	CurrentVersion Release `json:"currentVersion,omitempty"`
 
 	// UpdateAvailable indicates if there is an version update that is available for the addon
-	// it will be set to false if currentVersion.version != latestVersion.version
-	// it will be set to true if currentVersion.version == latestVersion.version
+	// it will be set to false if currentVersion.version == latestVersion.version
+	// it will be set to true if currentVersion.version != latestVersion.version
 	// +optional
 	UpdateAvailable bool `json:"updateAvailable,omitempty"`
 }
@@ -120,16 +120,16 @@ type Release struct {
 	Version string `json:"version"`
 
 	// RelatedImages is list of images will be used for the specific version
-	// this will be use for backward compatability (i.e hub updated but agent have not)
+	// this will be use for backward compatibility (i.e hub updated but agent have not)
 	// +required
 	RelatedImages []RelatedImage `json:"relatedImages"`
 }
 
-// RelatedImage represents information for one of the images that the agent uses its associated key.
+// RelatedImage represents information for one of the images that the agent uses as its associated key.
 // +k8s:deepcopy-gen=true
 type RelatedImage struct {
 	// ImageKey is the key to link the image to specific deployment for the agent
-	// this will be use for backward compatability, i.e if the hub updated but agent have not the agent
+	// this will be use for backward compatibility, i.e if the hub updated but agent have not the agent
 	// controller can use this information to continue to manage the agent.
 	// +required
 	ImageKey string `json:"imageKey"`
@@ -156,8 +156,8 @@ const (
 	// desired state over a period of time resulting in a lower quality of service.
 	// The period of time may vary by component, but a Degraded state represents
 	// persistent observation of a condition.  As a result, a component should not
-	// oscillate in and out of Degraded state.  A service may be Available even
-	// if its degraded.  For example, your service may desire 3 running pods, but 1
+	// oscillate in and out of a Degraded state.  A service may be Available even
+	// if it's degraded.  For example, your service may desire 3 running pods, but 1
 	// pod is crash-looping.  The service is Available but Degraded because it
 	// may have a lower quality of service.  A component may be Progressing but
 	// not Degraded because the transition from one state to another does not
