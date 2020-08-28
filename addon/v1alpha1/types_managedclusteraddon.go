@@ -27,14 +27,6 @@ type ManagedClusterAddOn struct {
 
 // ManagedClusterAddOnSpec is empty for now, but you could imagine holding information like "pause".
 type ManagedClusterAddOnSpec struct {
-	// UpdateApproved represents that user has approved the update of the particular addon for a specific
-	// the managed cluster on the hub.
-	// The default value is false, it can only be set to true when the latestVersion and currentVersion
-	// is on a different version.
-	// When the value is set true, the controller/operator that manages the addon will proceed to update the addon.
-	// The value will be set to false by mutating webhook when latestVersion matches currentVersion.
-	// +required
-	UpdateApproved bool `json:"updateApproved"`
 }
 
 // ManagedClusterAddOnStatus provides information about the status of the operator.
@@ -46,24 +38,10 @@ type ManagedClusterAddOnStatus struct {
 	// +optional
 	Conditions []AddOnStatusCondition `json:"conditions,omitempty"  patchStrategy:"merge" patchMergeKey:"type"`
 
-	// addonResource is a reference  to an object that contain the configuration of the addon
+	// addOnResource is a reference to the detailed resource driving the addon
+	// this resource must be located in the same namespace as the ManagedCluserAddOn
 	// +required
-	AddOnResource ObjectReference `json:"addonResource"`
-
-	// LatestVersion indicates the latest available Version for the addon
-	// +optional
-	LatestVersion Release `json:"latestVersion,omitempty"`
-
-	// CurrentVersion indicates the current Version of the addon
-	// During the agent update process this field will be set to same value as latestVersion after the update has been completed
-	// +optional
-	CurrentVersion Release `json:"currentVersion,omitempty"`
-
-	// UpdateAvailable indicates if there is an version update that is available for the addon
-	// it will be set to false if currentVersion.version == latestVersion.version
-	// it will be set to true if currentVersion.version != latestVersion.version
-	// +optional
-	UpdateAvailable bool `json:"updateAvailable,omitempty"`
+	AddOnResource ObjectReference `json:"addOnResource"`
 }
 
 // ObjectReference contains enough information to let you inspect or modify the referred object.
@@ -109,34 +87,6 @@ type AddOnStatusCondition struct {
 	// This is only to be consumed by humans.
 	// +optional
 	Message string `json:"message,omitempty"`
-}
-
-// Release represents an agent release version and it's related images.
-// +k8s:deepcopy-gen=true
-type Release struct {
-	// version is a semantic versioning identifying the update version. When this
-	// field is part of spec, version is optional if image is specified.
-	// +required
-	Version string `json:"version"`
-
-	// RelatedImages is list of images will be used for the specific version
-	// this will be use for backward compatibility (i.e hub updated but agent have not)
-	// +required
-	RelatedImages []RelatedImage `json:"relatedImages"`
-}
-
-// RelatedImage represents information for one of the images that the agent uses as its associated key.
-// +k8s:deepcopy-gen=true
-type RelatedImage struct {
-	// ImageKey is the key to link the image to specific deployment for the agent
-	// this will be use for backward compatibility, i.e if the hub updated but agent have not the agent
-	// controller can use this information to continue to manage the agent.
-	// +required
-	ImageKey string `json:"imageKey"`
-
-	// ImagePullSpec represents the desired image of the component for the addon agent.
-	// +required
-	ImagePullSpec string `json:"image"`
 }
 
 // AddOnStatusConditionType is an aspect of agent state.
