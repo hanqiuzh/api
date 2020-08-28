@@ -8,8 +8,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
-	// ClusterManagerAddOns returns a ClusterManagerAddOnInformer.
-	ClusterManagerAddOns() ClusterManagerAddOnInformer
+	// ClusterManagementAddOns returns a ClusterManagementAddOnInformer.
+	ClusterManagementAddOns() ClusterManagementAddOnInformer
 	// ManagedClusterAddOns returns a ManagedClusterAddOnInformer.
 	ManagedClusterAddOns() ManagedClusterAddOnInformer
 }
@@ -25,9 +25,9 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
 }
 
-// ClusterManagerAddOns returns a ClusterManagerAddOnInformer.
-func (v *version) ClusterManagerAddOns() ClusterManagerAddOnInformer {
-	return &clusterManagerAddOnInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+// ClusterManagementAddOns returns a ClusterManagementAddOnInformer.
+func (v *version) ClusterManagementAddOns() ClusterManagementAddOnInformer {
+	return &clusterManagementAddOnInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // ManagedClusterAddOns returns a ManagedClusterAddOnInformer.

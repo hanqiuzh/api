@@ -10,7 +10,7 @@ import (
 
 type AddonV1alpha1Interface interface {
 	RESTClient() rest.Interface
-	ClusterManagerAddOnsGetter
+	ClusterManagementAddOnsGetter
 	ManagedClusterAddOnsGetter
 }
 
@@ -19,8 +19,8 @@ type AddonV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *AddonV1alpha1Client) ClusterManagerAddOns() ClusterManagerAddOnInterface {
-	return newClusterManagerAddOns(c)
+func (c *AddonV1alpha1Client) ClusterManagementAddOns() ClusterManagementAddOnInterface {
+	return newClusterManagementAddOns(c)
 }
 
 func (c *AddonV1alpha1Client) ManagedClusterAddOns(namespace string) ManagedClusterAddOnInterface {

@@ -12,8 +12,8 @@ type FakeAddonV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeAddonV1alpha1) ClusterManagerAddOns() v1alpha1.ClusterManagerAddOnInterface {
-	return &FakeClusterManagerAddOns{c}
+func (c *FakeAddonV1alpha1) ClusterManagementAddOns() v1alpha1.ClusterManagementAddOnInterface {
+	return &FakeClusterManagementAddOns{c}
 }
 
 func (c *FakeAddonV1alpha1) ManagedClusterAddOns(namespace string) v1alpha1.ManagedClusterAddOnInterface {

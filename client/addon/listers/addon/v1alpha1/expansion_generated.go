@@ -2,9 +2,9 @@
 
 package v1alpha1
 
-// ClusterManagerAddOnListerExpansion allows custom methods to be added to
-// ClusterManagerAddOnLister.
-type ClusterManagerAddOnListerExpansion interface{}
+// ClusterManagementAddOnListerExpansion allows custom methods to be added to
+// ClusterManagementAddOnLister.
+type ClusterManagementAddOnListerExpansion interface{}
 
 // ManagedClusterAddOnListerExpansion allows custom methods to be added to
 // ManagedClusterAddOnLister.

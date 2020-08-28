@@ -8,7 +8,7 @@ import (
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // ManagedClusterAddOn is the Custom Resource object which holds the current state
-// of an addon. This object is used by addon operators to convey their state.
+// of an add-on. This object is used by add-on operators to convey their state.
 // The resource should be created in the ManagedCluster's cluster namespace.
 type ManagedClusterAddOn struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -38,8 +38,8 @@ type ManagedClusterAddOnStatus struct {
 	// +optional
 	Conditions []AddOnStatusCondition `json:"conditions,omitempty"  patchStrategy:"merge" patchMergeKey:"type"`
 
-	// addOnResource is a reference to the detailed resource driving the addon
-	// this resource must be located in the same namespace as the ManagedCluserAddOn
+	// addOnResource is a reference to the detailed resource driving the add-on
+	// this resource must be located in the same namespace as the ManagedClusterAddOn
 	// +required
 	AddOnResource ObjectReference `json:"addOnResource"`
 }
@@ -60,7 +60,7 @@ type ObjectReference struct {
 	Name string `json:"name"`
 }
 
-// AddOnStatusCondition represents the state of the addon's
+// AddOnStatusCondition represents the state of the add-on's
 // managed and monitored components.
 // +k8s:deepcopy-gen=true
 type AddOnStatusCondition struct {
