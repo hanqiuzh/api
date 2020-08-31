@@ -9,6 +9,8 @@ import (
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope="Cluster"
+// +kubebuilder:printcolumn:name="DISPLAY NAME",type=string,JSONPath=`.spec.displayName`
+// +kubebuilder:printcolumn:name="CRD NAME",type=string,JSONPath=`.spec.addOnConfigCRD`
 
 // ClusterManagementAddOn represents the registration of an add-on to the cluster management.
 // This resource allows the user to discover which add-on is available for the cluster management and

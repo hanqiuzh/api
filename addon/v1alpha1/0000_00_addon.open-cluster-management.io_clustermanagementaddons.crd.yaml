@@ -4,6 +4,13 @@ metadata:
   creationTimestamp: null
   name: clustermanagementaddons.addon.open-cluster-management.io
 spec:
+  additionalPrinterColumns:
+  - JSONPath: .spec.displayName
+    name: DISPLAY NAME
+    type: string
+  - JSONPath: .spec.addOnConfigCRD
+    name: CRD NAME
+    type: string
   group: addon.open-cluster-management.io
   names:
     kind: ClusterManagementAddOn
@@ -17,13 +24,11 @@ spec:
   validation:
     openAPIV3Schema:
       description: ClusterManagementAddOn represents the registration of an add-on
-        to the cluster manager. This resource allows the user to discover which add-on
-        is available for the cluster manager and also provides metadata information
-        about the add-on. The resource also provides a linkage to ManagedClusterAddOn,
-        the name of the ClusterManagementAddOn resource will be use for the namespace
-        scoped ManagedClusterAddOn resource ClusterManagementAddOn is a cluster scoped
-        resource.
-      type: object
+        to the cluster management. This resource allows the user to discover which
+        add-on is available for the cluster management and also provides metadata
+        information about the add-on. The resource also provides a linkage to ManagedClusterAddOn,
+        the name of the ClusterManagementAddOn resource will be used for the namespace-scoped
+        ManagedClusterAddOn resource ClusterManagementAddOn is a cluster-scoped resource.
       properties:
         apiVersion:
           description: 'APIVersion defines the versioned schema of this representation
@@ -39,14 +44,13 @@ spec:
           type: object
         spec:
           description: Spec represents a desired configuration for the agent on the
-            cluster manager add-on
-          type: object
+            cluster management add-on.
           properties:
             addOnConfigCRD:
               description: 'AddOnConfigCRD is a reference to the name of the CRD that
-                driving the configuration of the add-on Note: there may be a case
-                where a single add-on config CRD controls multiple related add-ons,
-                in this case multiple ClusterManagementAddOn resource should be created.'
+                configures the add-on Note: There may be a case where a single add-on
+                config CRD controls multiple related add-ons, in this case multiple
+                ClusterManagementAddOn resource should be created.'
               type: string
             description:
               description: Description represents the detailed description of the
@@ -55,9 +59,12 @@ spec:
             displayName:
               description: DisplayName represents the name that will be displayed.
               type: string
-        status:
-          description: Status represents the current status of cluster manager add-on
           type: object
+        status:
+          description: Status represents the current status of cluster management
+            add-on.
+          type: object
+      type: object
   version: v1alpha1
   versions:
   - name: v1alpha1

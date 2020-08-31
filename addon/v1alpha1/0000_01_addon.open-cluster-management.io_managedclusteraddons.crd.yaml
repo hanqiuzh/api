@@ -4,6 +4,13 @@ metadata:
   creationTimestamp: null
   name: managedclusteraddons.addon.open-cluster-management.io
 spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.conditions[?(@.type=="Progressing")].status
+    name: Progressing
+    type: string
+  - JSONPath: .status.conditions[?(@.type=="Available")].status
+    name: Available
+    type: string
   group: addon.open-cluster-management.io
   names:
     kind: ManagedClusterAddOn
@@ -12,15 +19,14 @@ spec:
     singular: managedclusteraddon
   preserveUnknownFields: false
   scope: Namespaced
+  subresources:
+    status: {}
   validation:
     openAPIV3Schema:
       description: ManagedClusterAddOn is the Custom Resource object which holds the
         current state of an add-on. This object is used by add-on operators to convey
         their state. The resource should be created in the ManagedCluster's cluster
         namespace.
-      type: object
-      required:
-      - spec
       properties:
         apiVersion:
           description: 'APIVersion defines the versioned schema of this representation
@@ -40,17 +46,11 @@ spec:
         status:
           description: status holds the information about the state of an operator.  It
             is consistent with status information across the Kubernetes ecosystem.
-          type: object
           properties:
             addOnResource:
               description: addOnResource is a reference to the detailed resource driving
                 the add-on this resource must be located in the same namespace as
                 the ManagedClusterAddOn
-              type: object
-              required:
-              - group
-              - name
-              - resource
               properties:
                 group:
                   description: group of the referent.
@@ -61,24 +61,23 @@ spec:
                 resource:
                   description: resource of the referent.
                   type: string
+              required:
+              - group
+              - name
+              - resource
+              type: object
             conditions:
               description: conditions describe the state of the operator's managed
                 and monitored components.
-              type: array
               items:
                 description: AddOnStatusCondition represents the state of the add-on's
                   managed and monitored components.
-                type: object
-                required:
-                - lastTransitionTime
-                - status
-                - type
                 properties:
                   lastTransitionTime:
                     description: lastTransitionTime is the time of the last update
                       to the current status property.
-                    type: string
                     format: date-time
+                    type: string
                   message:
                     description: message provides additional information about the
                       current condition. This is only to be consumed by humans.
@@ -93,6 +92,16 @@ spec:
                   type:
                     description: type specifies the aspect reported by this condition.
                     type: string
+                required:
+                - lastTransitionTime
+                - status
+                - type
+                type: object
+              type: array
+          type: object
+      required:
+      - spec
+      type: object
   version: v1alpha1
   versions:
   - name: v1alpha1
