@@ -29,6 +29,7 @@ spec:
         information about the add-on. The resource also provides a linkage to ManagedClusterAddOn,
         the name of the ClusterManagementAddOn resource will be used for the namespace-scoped
         ManagedClusterAddOn resource ClusterManagementAddOn is a cluster-scoped resource.
+      type: object
       properties:
         apiVersion:
           description: 'APIVersion defines the versioned schema of this representation
@@ -45,6 +46,7 @@ spec:
         spec:
           description: Spec represents a desired configuration for the agent on the
             cluster management add-on.
+          type: object
           properties:
             addOnConfigCRD:
               description: 'AddOnConfigCRD is a reference to the name of the CRD that
@@ -59,12 +61,10 @@ spec:
             displayName:
               description: DisplayName represents the name that will be displayed.
               type: string
-          type: object
         status:
           description: Status represents the current status of cluster management
             add-on.
           type: object
-      type: object
   version: v1alpha1
   versions:
   - name: v1alpha1
