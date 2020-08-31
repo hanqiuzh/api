@@ -12,9 +12,9 @@ package v1alpha1
 
 // AUTO-GENERATED FUNCTIONS START HERE
 var map_ClusterManagementAddOn = map[string]string{
-	"":       "ClusterManagementAddOn represents the registration of an add-on to the cluster manager. This resource allows the user to discover which add-on is available for the cluster manager and also provides metadata information about the add-on. The resource also provides a linkage to ManagedClusterAddOn, the name of the ClusterManagementAddOn resource will be use for the namespace scoped ManagedClusterAddOn resource ClusterManagementAddOn is a cluster scoped resource.",
-	"spec":   "Spec represents a desired configuration for the agent on the cluster manager add-on",
-	"status": "Status represents the current status of cluster manager add-on",
+	"":       "ClusterManagementAddOn represents the registration of an add-on to the cluster management. This resource allows the user to discover which add-on is available for the cluster management and also provides metadata information about the add-on. The resource also provides a linkage to ManagedClusterAddOn, the name of the ClusterManagementAddOn resource will be used for the namespace-scoped ManagedClusterAddOn resource ClusterManagementAddOn is a cluster-scoped resource.",
+	"spec":   "Spec represents a desired configuration for the agent on the cluster management add-on.",
+	"status": "Status represents the current status of cluster management add-on.",
 }
 
 func (ClusterManagementAddOn) SwaggerDoc() map[string]string {
@@ -22,9 +22,9 @@ func (ClusterManagementAddOn) SwaggerDoc() map[string]string {
 }
 
 var map_ClusterManagementAddOnList = map[string]string{
-	"":         "ClusterManagementAddOnList is a collection of cluster manager add-ons.",
+	"":         "ClusterManagementAddOnList is a collection of cluster management add-ons.",
 	"metadata": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-	"items":    "Items is a list of cluster manager add-ons.",
+	"items":    "Items is a list of cluster management add-ons.",
 }
 
 func (ClusterManagementAddOnList) SwaggerDoc() map[string]string {
@@ -35,7 +35,7 @@ var map_ClusterManagementAddOnSpec = map[string]string{
 	"":               "ClusterManagementAddOnSpec provides the information of add-on CustomResourceDefinition.",
 	"displayName":    "DisplayName represents the name that will be displayed.",
 	"description":    "Description represents the detailed description of the add-on.",
-	"addOnConfigCRD": "AddOnConfigCRD is a reference to the name of the CRD that driving the configuration of the add-on Note: there may be a case where a single add-on config CRD controls multiple related add-ons, in this case multiple ClusterManagementAddOn resource should be created.",
+	"addOnConfigCRD": "AddOnConfigCRD is a reference to the name of the CRD that configures the add-on Note: There may be a case where a single add-on config CRD controls multiple related add-ons, in this case multiple ClusterManagementAddOn resource should be created.",
 }
 
 func (ClusterManagementAddOnSpec) SwaggerDoc() map[string]string {
@@ -43,7 +43,7 @@ func (ClusterManagementAddOnSpec) SwaggerDoc() map[string]string {
 }
 
 var map_ClusterManagementAddOnStatus = map[string]string{
-	"": "ClusterManagementAddOnStatus represents the current status of cluster manager add-on.",
+	"": "ClusterManagementAddOnStatus represents the current status of cluster management add-on.",
 }
 
 func (ClusterManagementAddOnStatus) SwaggerDoc() map[string]string {
