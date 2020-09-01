@@ -56,6 +56,10 @@ type ObjectReference struct {
 	// +kubebuilder:validation:Required
 	// +required
 	Group string `json:"group"`
+	// version of the referent.
+	// +kubebuilder:validation:Required
+	// +required
+	Version string `json:"version"`
 	// resource of the referent.
 	// +kubebuilder:validation:Required
 	// +required

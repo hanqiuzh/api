@@ -35,7 +35,7 @@ var map_ClusterManagementAddOnSpec = map[string]string{
 	"":               "ClusterManagementAddOnSpec provides the information of add-on CustomResourceDefinition.",
 	"displayName":    "displayName represents the name that will be displayed.",
 	"description":    "description represents the detailed description of the add-on.",
-	"addOnConfigCRD": "addOnConfigCRD is a reference to the name of the CRD that configures the add-on. In scenario where a multiple add-ons share the same add-on config CRD multiple ClusterManagementAddOn resource need to be created.",
+	"addOnConfigCRD": "addOnConfigCRD is a reference to the name of the CRD that configures the add-on. In scenario where a multiple add-ons share the same add-on config CRD, multiple ClusterManagementAddOn resources need to be created and reference the same add-on config CRD.",
 }
 
 func (ClusterManagementAddOnSpec) SwaggerDoc() map[string]string {
@@ -102,6 +102,7 @@ func (ManagedClusterAddOnStatus) SwaggerDoc() map[string]string {
 var map_ObjectReference = map[string]string{
 	"":         "ObjectReference contains enough information to let you inspect or modify the referred object.",
 	"group":    "group of the referent.",
+	"version":  "version of the referent.",
 	"resource": "resource of the referent.",
 	"name":     "name of the referent.",
 }
