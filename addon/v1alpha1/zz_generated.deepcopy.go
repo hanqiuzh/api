@@ -205,7 +205,11 @@ func (in *ManagedClusterAddOnStatus) DeepCopyInto(out *ManagedClusterAddOnStatus
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	out.AddOnResource = in.AddOnResource
+	if in.RelatedObjects != nil {
+		in, out := &in.RelatedObjects, &out.RelatedObjects
+		*out = make([]ObjectReference, len(*in))
+		copy(*out, *in)
+	}
 	return
 }
 

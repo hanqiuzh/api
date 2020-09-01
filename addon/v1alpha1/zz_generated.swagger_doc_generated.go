@@ -90,9 +90,9 @@ func (ManagedClusterAddOnSpec) SwaggerDoc() map[string]string {
 }
 
 var map_ManagedClusterAddOnStatus = map[string]string{
-	"":              "ManagedClusterAddOnStatus provides information about the status of the operator.",
-	"conditions":    "conditions describe the state of the managed and monitored components for the operator.",
-	"addOnResource": "addOnResource is a reference to the detailed resource that configures the add-on. This resource must be located in the same namespace as the ManagedClusterAddOn.",
+	"":               "ManagedClusterAddOnStatus provides information about the status of the operator.",
+	"conditions":     "conditions describe the state of the managed and monitored components for the operator.",
+	"relatedObjects": "relatedObjects is a list of objects that are \"interesting\" or related to this operator. Common uses are: 1. the detailed resource driving the operator 2. operator namespaces 3. operand namespaces 4. related ClusterManagementAddon resource",
 }
 
 func (ManagedClusterAddOnStatus) SwaggerDoc() map[string]string {

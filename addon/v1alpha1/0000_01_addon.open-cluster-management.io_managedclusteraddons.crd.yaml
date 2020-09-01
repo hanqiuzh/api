@@ -50,25 +50,6 @@ spec:
             is consistent with status information across the Kubernetes ecosystem.
           type: object
           properties:
-            addOnResource:
-              description: addOnResource is a reference to the detailed resource that
-                configures the add-on. This resource must be located in the same namespace
-                as the ManagedClusterAddOn.
-              type: object
-              required:
-              - group
-              - name
-              - resource
-              properties:
-                group:
-                  description: group of the referent.
-                  type: string
-                name:
-                  description: name of the referent.
-                  type: string
-                resource:
-                  description: resource of the referent.
-                  type: string
             conditions:
               description: conditions describe the state of the managed and monitored
                 components for the operator.
@@ -101,6 +82,30 @@ spec:
                     type: string
                   type:
                     description: type specifies the aspect reported by this condition.
+                    type: string
+            relatedObjects:
+              description: 'relatedObjects is a list of objects that are "interesting"
+                or related to this operator. Common uses are: 1. the detailed resource
+                driving the operator 2. operator namespaces 3. operand namespaces
+                4. related ClusterManagementAddon resource'
+              type: array
+              items:
+                description: ObjectReference contains enough information to let you
+                  inspect or modify the referred object.
+                type: object
+                required:
+                - group
+                - name
+                - resource
+                properties:
+                  group:
+                    description: group of the referent.
+                    type: string
+                  name:
+                    description: name of the referent.
+                    type: string
+                  resource:
+                    description: resource of the referent.
                     type: string
   version: v1alpha1
   versions:
