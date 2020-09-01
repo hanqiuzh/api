@@ -13,8 +13,8 @@ package v1alpha1
 // AUTO-GENERATED FUNCTIONS START HERE
 var map_ClusterManagementAddOn = map[string]string{
 	"":       "ClusterManagementAddOn represents the registration of an add-on to the cluster management. This resource allows the user to discover which add-on is available for the cluster management and also provides metadata information about the add-on. The resource also provides a linkage to ManagedClusterAddOn, the name of the ClusterManagementAddOn resource will be used for the namespace-scoped ManagedClusterAddOn resource ClusterManagementAddOn is a cluster-scoped resource.",
-	"spec":   "Spec represents a desired configuration for the agent on the cluster management add-on.",
-	"status": "Status represents the current status of cluster management add-on.",
+	"spec":   "spec represents a desired configuration for the agent on the cluster management add-on.",
+	"status": "status represents the current status of cluster management add-on.",
 }
 
 func (ClusterManagementAddOn) SwaggerDoc() map[string]string {
@@ -33,9 +33,9 @@ func (ClusterManagementAddOnList) SwaggerDoc() map[string]string {
 
 var map_ClusterManagementAddOnSpec = map[string]string{
 	"":               "ClusterManagementAddOnSpec provides the information of add-on CustomResourceDefinition.",
-	"displayName":    "DisplayName represents the name that will be displayed.",
-	"description":    "Description represents the detailed description of the add-on.",
-	"addOnConfigCRD": "AddOnConfigCRD is a reference to the name of the CRD that configures the add-on Note: There may be a case where a single add-on config CRD controls multiple related add-ons, in this case multiple ClusterManagementAddOn resource should be created.",
+	"displayName":    "displayName represents the name that will be displayed.",
+	"description":    "description represents the detailed description of the add-on.",
+	"addOnConfigCRD": "addOnConfigCRD is a reference to the name of the CRD that configures the add-on. In scenario where a multiple add-ons share the same add-on config CRD multiple ClusterManagementAddOn resource need to be created.",
 }
 
 func (ClusterManagementAddOnSpec) SwaggerDoc() map[string]string {
@@ -51,9 +51,9 @@ func (ClusterManagementAddOnStatus) SwaggerDoc() map[string]string {
 }
 
 var map_AddOnStatusCondition = map[string]string{
-	"":                   "AddOnStatusCondition represents the state of the add-on's managed and monitored components.",
+	"":                   "AddOnStatusCondition represents the state of the add-on managed and monitored components.",
 	"type":               "type specifies the aspect reported by this condition.",
-	"status":             "status of the condition, one of True, False, Unknown.",
+	"status":             "status of the condition. Status can be True, False, Unknown.",
 	"lastTransitionTime": "lastTransitionTime is the time of the last update to the current status property.",
 	"reason":             "reason is the CamelCase reason for the condition's current status.",
 	"message":            "message provides additional information about the current condition. This is only to be consumed by humans.",
@@ -64,7 +64,7 @@ func (AddOnStatusCondition) SwaggerDoc() map[string]string {
 }
 
 var map_ManagedClusterAddOn = map[string]string{
-	"":       "ManagedClusterAddOn is the Custom Resource object which holds the current state of an add-on. This object is used by add-on operators to convey their state. The resource should be created in the ManagedCluster's cluster namespace.",
+	"":       "ManagedClusterAddOn is the Custom Resource object which holds the current state of an add-on. This object is used by add-on operators to convey their state. The resource should be created in the ManagedCluster namespace.",
 	"spec":   "spec holds configuration that could apply to any operator.",
 	"status": "status holds the information about the state of an operator.  It is consistent with status information across the Kubernetes ecosystem.",
 }
@@ -82,7 +82,7 @@ func (ManagedClusterAddOnList) SwaggerDoc() map[string]string {
 }
 
 var map_ManagedClusterAddOnSpec = map[string]string{
-	"": "ManagedClusterAddOnSpec is empty for now, but you could imagine holding information like \"pause\".",
+	"": "ManagedClusterAddOnSpec is empty for now.",
 }
 
 func (ManagedClusterAddOnSpec) SwaggerDoc() map[string]string {
@@ -91,8 +91,8 @@ func (ManagedClusterAddOnSpec) SwaggerDoc() map[string]string {
 
 var map_ManagedClusterAddOnStatus = map[string]string{
 	"":              "ManagedClusterAddOnStatus provides information about the status of the operator.",
-	"conditions":    "conditions describe the state of the operator's managed and monitored components.",
-	"addOnResource": "addOnResource is a reference to the detailed resource driving the add-on this resource must be located in the same namespace as the ManagedClusterAddOn",
+	"conditions":    "conditions describe the state of the managed and monitored components for the operator.",
+	"addOnResource": "addOnResource is a reference to the detailed resource that configures the add-on. This resource must be located in the same namespace as the ManagedClusterAddOn.",
 }
 
 func (ManagedClusterAddOnStatus) SwaggerDoc() map[string]string {
