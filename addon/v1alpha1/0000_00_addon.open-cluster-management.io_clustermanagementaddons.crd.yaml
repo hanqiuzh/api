@@ -44,25 +44,25 @@ spec:
         metadata:
           type: object
         spec:
-          description: Spec represents a desired configuration for the agent on the
+          description: spec represents a desired configuration for the agent on the
             cluster management add-on.
           type: object
           properties:
             addOnConfigCRD:
-              description: 'AddOnConfigCRD is a reference to the name of the CRD that
-                configures the add-on Note: There may be a case where a single add-on
-                config CRD controls multiple related add-ons, in this case multiple
-                ClusterManagementAddOn resource should be created.'
+              description: addOnConfigCRD is a reference to the name of the CRD that
+                configures the add-on. In scenario where a multiple add-ons share
+                the same add-on config CRD multiple ClusterManagementAddOn resource
+                need to be created.
               type: string
             description:
-              description: Description represents the detailed description of the
+              description: description represents the detailed description of the
                 add-on.
               type: string
             displayName:
-              description: DisplayName represents the name that will be displayed.
+              description: displayName represents the name that will be displayed.
               type: string
         status:
-          description: Status represents the current status of cluster management
+          description: status represents the current status of cluster management
             add-on.
           type: object
   version: v1alpha1

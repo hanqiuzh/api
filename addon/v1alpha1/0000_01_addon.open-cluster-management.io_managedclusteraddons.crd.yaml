@@ -25,8 +25,7 @@ spec:
     openAPIV3Schema:
       description: ManagedClusterAddOn is the Custom Resource object which holds the
         current state of an add-on. This object is used by add-on operators to convey
-        their state. The resource should be created in the ManagedCluster's cluster
-        namespace.
+        their state. The resource should be created in the ManagedCluster namespace.
       type: object
       required:
       - spec
@@ -52,9 +51,9 @@ spec:
           type: object
           properties:
             addOnResource:
-              description: addOnResource is a reference to the detailed resource driving
-                the add-on this resource must be located in the same namespace as
-                the ManagedClusterAddOn
+              description: addOnResource is a reference to the detailed resource that
+                configures the add-on. This resource must be located in the same namespace
+                as the ManagedClusterAddOn.
               type: object
               required:
               - group
@@ -71,11 +70,11 @@ spec:
                   description: resource of the referent.
                   type: string
             conditions:
-              description: conditions describe the state of the operator's managed
-                and monitored components.
+              description: conditions describe the state of the managed and monitored
+                components for the operator.
               type: array
               items:
-                description: AddOnStatusCondition represents the state of the add-on's
+                description: AddOnStatusCondition represents the state of the add-on
                   managed and monitored components.
                 type: object
                 required:
@@ -97,7 +96,8 @@ spec:
                       current status.
                     type: string
                   status:
-                    description: status of the condition, one of True, False, Unknown.
+                    description: status of the condition. Status can be True, False,
+                      Unknown.
                     type: string
                   type:
                     description: type specifies the aspect reported by this condition.

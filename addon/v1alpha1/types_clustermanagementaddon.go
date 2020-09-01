@@ -22,27 +22,26 @@ type ClusterManagementAddOn struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// Spec represents a desired configuration for the agent on the cluster management add-on.
+	// spec represents a desired configuration for the agent on the cluster management add-on.
 	Spec ClusterManagementAddOnSpec `json:"spec"`
 
-	// Status represents the current status of cluster management add-on.
+	// status represents the current status of cluster management add-on.
 	// +optional
 	Status ClusterManagementAddOnStatus `json:"status,omitempty"`
 }
 
 // ClusterManagementAddOnSpec provides the information of add-on CustomResourceDefinition.
 type ClusterManagementAddOnSpec struct {
-	// DisplayName represents the name that will be displayed.
+	// displayName represents the name that will be displayed.
 	// +required
 	DisplayName string `json:"displayName"`
 
-	// Description represents the detailed description of the add-on.
+	// description represents the detailed description of the add-on.
 	// +optional
 	Description string `json:"description"`
 
-	// AddOnConfigCRD is a reference to the name of the CRD that configures the add-on
-	// Note: There may be a case where a single add-on config CRD controls multiple related add-ons,
-	// in this case multiple ClusterManagementAddOn resource should be created.
+	// addOnConfigCRD is a reference to the name of the CRD that configures the add-on.
+	// In scenario where a multiple add-ons share the same add-on config CRD multiple ClusterManagementAddOn resource need to be created.
 	// +required
 	AddOnConfigCRD string `json:"addOnConfigCRD"`
 }

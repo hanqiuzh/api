@@ -12,7 +12,7 @@ import (
 
 // ManagedClusterAddOn is the Custom Resource object which holds the current state
 // of an add-on. This object is used by add-on operators to convey their state.
-// The resource should be created in the ManagedCluster's cluster namespace.
+// The resource should be created in the ManagedCluster namespace.
 type ManagedClusterAddOn struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata"`
@@ -28,21 +28,21 @@ type ManagedClusterAddOn struct {
 	Status ManagedClusterAddOnStatus `json:"status"`
 }
 
-// ManagedClusterAddOnSpec is empty for now, but you could imagine holding information like "pause".
+// ManagedClusterAddOnSpec is empty for now.
 type ManagedClusterAddOnSpec struct {
 }
 
 // ManagedClusterAddOnStatus provides information about the status of the operator.
 // +k8s:deepcopy-gen=true
 type ManagedClusterAddOnStatus struct {
-	// conditions describe the state of the operator's managed and monitored components.
+	// conditions describe the state of the managed and monitored components for the operator.
 	// +patchMergeKey=type
 	// +patchStrategy=merge
 	// +optional
 	Conditions []AddOnStatusCondition `json:"conditions,omitempty"  patchStrategy:"merge" patchMergeKey:"type"`
 
-	// addOnResource is a reference to the detailed resource driving the add-on
-	// this resource must be located in the same namespace as the ManagedClusterAddOn
+	// addOnResource is a reference to the detailed resource that configures the add-on.
+	// This resource must be located in the same namespace as the ManagedClusterAddOn.
 	// +required
 	AddOnResource ObjectReference `json:"addOnResource"`
 }
@@ -63,7 +63,7 @@ type ObjectReference struct {
 	Name string `json:"name"`
 }
 
-// AddOnStatusCondition represents the state of the add-on's
+// AddOnStatusCondition represents the state of the add-on
 // managed and monitored components.
 // +k8s:deepcopy-gen=true
 type AddOnStatusCondition struct {
@@ -72,7 +72,7 @@ type AddOnStatusCondition struct {
 	// +required
 	Type AddOnStatusConditionType `json:"type"`
 
-	// status of the condition, one of True, False, Unknown.
+	// status of the condition. Status can be True, False, Unknown.
 	// +kubebuilder:validation:Required
 	// +required
 	Status metav1.ConditionStatus `json:"status"`
