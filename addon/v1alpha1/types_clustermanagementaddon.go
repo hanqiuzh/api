@@ -41,7 +41,8 @@ type ClusterManagementAddOnSpec struct {
 	Description string `json:"description"`
 
 	// addOnConfigCRD is a reference to the name of the CRD that configures the add-on.
-	// In scenario where a multiple add-ons share the same add-on config CRD multiple ClusterManagementAddOn resource need to be created.
+	// In scenario where a multiple add-ons share the same add-on config CRD,
+	// multiple ClusterManagementAddOn resources need to be created and reference the same add-on config CRD.
 	// +required
 	AddOnConfigCRD string `json:"addOnConfigCRD"`
 }
