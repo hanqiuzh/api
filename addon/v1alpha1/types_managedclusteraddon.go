@@ -41,10 +41,13 @@ type ManagedClusterAddOnStatus struct {
 	// +optional
 	Conditions []AddOnStatusCondition `json:"conditions,omitempty"  patchStrategy:"merge" patchMergeKey:"type"`
 
-	// addOnResource is a reference to the detailed resource that configures the add-on.
-	// This resource must be located in the same namespace as the ManagedClusterAddOn.
-	// +required
-	AddOnResource ObjectReference `json:"addOnResource"`
+	// relatedObjects is a list of objects that are "interesting" or related to this operator. Common uses are:
+	// 1. the detailed resource driving the operator
+	// 2. operator namespaces
+	// 3. operand namespaces
+	// 4. related ClusterManagementAddon resource
+	// +optional
+	RelatedObjects []ObjectReference `json:"relatedObjects,omitempty"`
 }
 
 // ObjectReference contains enough information to let you inspect or modify the referred object.
